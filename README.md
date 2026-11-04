@@ -1,6 +1,6 @@
 # e2e-web-app
 
-A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end testing.
+A small Node.js (Express) + PostgreSQL web app that serves as a target for end-to-end testing.
 
 ## What's inside
 
