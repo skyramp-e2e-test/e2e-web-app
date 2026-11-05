@@ -1,6 +1,6 @@
 # e2e-web-app
 
-A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end testing.
+A small Node.js (Express) + PostgreSQL web app that serves as a target for end-to-end testing.
 
 ## What's inside
 
@@ -86,3 +86,4 @@ curl -s -X POST http://localhost:3000/api/items \
   -H 'Content-Type: application/json' -d '{"name":"First item"}'
 curl -s http://localhost:3000/api/items
 ```
+// UC-10.4

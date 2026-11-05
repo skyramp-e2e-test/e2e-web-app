@@ -75,7 +75,6 @@ function createApp({ pool, signingSecret }) {
   app.post('/api/items', async (req, res, next) => {
     try {
       const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
-      if (!name) return res.status(400).json({ error: 'name is required' });
       const { rows } = await pool.query(
         'INSERT INTO items (name) VALUES ($1) RETURNING id, name, created_at',
         [name]
