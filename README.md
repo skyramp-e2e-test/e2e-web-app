@@ -1,4 +1,4 @@
-# e2e-web-app
+# e2e-web-app (UC-10.6 fork change)
 
 A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end testing.
 
