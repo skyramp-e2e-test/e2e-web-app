@@ -86,3 +86,4 @@ curl -s -X POST http://localhost:3000/api/items \
   -H 'Content-Type: application/json' -d '{"name":"First item"}'
 curl -s http://localhost:3000/api/items
 ```
+Fork test for UC-10.6
