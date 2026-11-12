@@ -11,7 +11,7 @@ A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end t
 | `GET /items` | Items page: lists items and lets you add new ones |
 | `GET /api/items` | JSON list of items |
 | `POST /api/items` | Create an item. Body: `{"name": "..."}`. Returns `201` with the created item; returns `400` if `name` is missing |
-| `GET /health`, `GET /healthz` | Health checks. Both return `200` |
+| `GET /health`, `GET /healthz` | Health checks. Both return `200`. |
 
 `docker-compose.yml` defines two services:
 
