@@ -86,7 +86,7 @@ function createApp({ pool, signingSecret }) {
     }
   });
 
-  app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
+  app.use((_req, res) => res.status(404).json({ error: 'Not found (B)' }));
 
   // eslint-disable-next-line no-unused-vars
   app.use((err, _req, res, _next) => {
