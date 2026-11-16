@@ -18,7 +18,11 @@ async function main() {
   await migrate(pool);
   await seedTestUser(pool);
 
-  const app = createApp({ pool, signingSecret: config.signingSecret });
+  const app = createApp({
+    pool,
+    signingSecret: config.signingSecret,
+    isRealSecret: config.isRealSecret,
+  });
   app.listen(config.port, () => {
     console.log(`Server listening on http://localhost:${config.port}`);
   });

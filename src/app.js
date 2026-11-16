@@ -7,8 +7,10 @@ const { verifyPassword } = require('./passwords');
 
 const SESSION_COOKIE = 'session';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const SECRET_MISMATCH_MESSAGE =
+  'Sign-in disabled: APP_SIGNING_SECRET is not the real secret.';
 
-function createApp({ pool, signingSecret }) {
+function createApp({ pool, signingSecret, isRealSecret }) {
   const app = express();
 
   app.use(express.json());
@@ -30,6 +32,9 @@ function createApp({ pool, signingSecret }) {
   app.use('/static', express.static(PUBLIC_DIR));
 
   app.post('/login', async (req, res, next) => {
+    if (!isRealSecret) {
+      return res.status(401).json({ error: SECRET_MISMATCH_MESSAGE });
+    }
     try {
       const email = String(req.body.email || '').trim().toLowerCase();
       const password = String(req.body.password || '');

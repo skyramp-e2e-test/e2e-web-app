@@ -22,6 +22,8 @@ On startup the app creates its tables and seeds a test user.
 
 ## Required configuration
 
+This branch requires the real APP_SIGNING_SECRET; a generated value fails sign-in.
+
 The app **refuses to start** unless `APP_SIGNING_SECRET` is set. It signs the session cookie with this value. The app never prints or logs the value.
 
 If the variable is missing:
