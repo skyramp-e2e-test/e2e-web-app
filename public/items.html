@@ -39,10 +39,16 @@
     document.getElementById('add-item-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = document.getElementById('item-name');
+      const name = input.value.trim();
+      if (Array.from(name).length > 50) {
+        errorEl.textContent = 'Name must be 50 characters or fewer.';
+        errorEl.hidden = false;
+        return;
+      }
       const res = await fetch('/api/items', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: input.value }),
+        body: JSON.stringify({ name }),
       });
       if (!res.ok) {
         errorEl.textContent = (await res.json()).error || 'Could not add item';
