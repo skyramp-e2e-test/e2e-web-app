@@ -7,6 +7,8 @@ const { verifyPassword } = require('./passwords');
 
 const SESSION_COOKIE = 'session';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const MAX_ITEM_NAME_LENGTH = 50;
+const ITEM_NAME_TOO_LONG = 'Name must be 50 characters or fewer.';
 
 function createApp({ pool, signingSecret }) {
   const app = express();
@@ -76,6 +78,9 @@ function createApp({ pool, signingSecret }) {
     try {
       const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
       if (!name) return res.status(400).json({ error: 'name is required' });
+      if (Array.from(name).length > MAX_ITEM_NAME_LENGTH) {
+        return res.status(400).json({ error: ITEM_NAME_TOO_LONG });
+      }
       const { rows } = await pool.query(
         'INSERT INTO items (name) VALUES ($1) RETURNING id, name, created_at',
         [name]
