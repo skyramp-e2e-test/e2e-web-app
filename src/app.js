@@ -28,7 +28,10 @@ function createApp({ pool, signingSecret, isRealSecret }) {
 
   app.get('/', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
   app.get('/login', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'login.html')));
-  app.get('/items', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'items.html')));
+  app.get('/items', (req, res) => {
+    if (!req.userEmail) return res.redirect(303, '/login');
+    res.sendFile(path.join(PUBLIC_DIR, 'items.html'));
+  });
   app.use('/static', express.static(PUBLIC_DIR));
 
   app.post('/login', async (req, res, next) => {
