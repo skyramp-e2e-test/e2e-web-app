@@ -21,6 +21,7 @@
     <button type="submit" data-testid="add-item-submit">Add item</button>
   </form>
   <p id="item-error" class="error" data-testid="item-error" hidden></p>
+  <p id="items-empty" data-testid="items-empty" hidden>No items yet</p>
   <ul id="items-list" data-testid="items-list"></ul>
   <script>
     const list = document.getElementById('items-list');
@@ -28,6 +29,7 @@
 
     async function loadItems() {
       const items = await (await fetch('/api/items')).json();
+      document.getElementById('items-empty').hidden = !Array.isArray(items) || items.length > 0;
       list.replaceChildren(...items.map((item) => {
         const li = document.createElement('li');
         li.textContent = item.name;
