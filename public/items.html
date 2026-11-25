@@ -31,6 +31,7 @@
       list.replaceChildren(...items.map((item) => {
         const li = document.createElement('li');
         li.textContent = item.name;
+        li.title = item.name;
         li.dataset.testid = 'item';
         return li;
       }));
