@@ -76,6 +76,7 @@ function createApp({ pool, signingSecret }) {
     try {
       const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
       if (!name) return res.status(400).json({ error: 'name is required' });
+      if (name.length > 80) return res.status(400).json({ error: 'name must be at most 80 characters' });
       const { rows } = await pool.query(
         'INSERT INTO items (name) VALUES ($1) RETURNING id, name, created_at',
         [name]
