@@ -10,7 +10,7 @@ A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end t
 | `GET /login` | Login page (form posts to `POST /login`) |
 | `GET /items` | Items page: lists items and lets you add new ones |
 | `GET /api/items` | JSON list of items |
-| `POST /api/items` | Create an item. Body: `{"name": "..."}`. Returns `201` with the created item; returns `400` if `name` is missing |
+| `POST /api/items` | Create an item. Body: `{"name": "..."}`. Returns `201` with the created item; returns `400` if `name` is missing or longer than 80 characters |
 | `GET /health`, `GET /healthz` | Health checks. Both return `200` |
 
 `docker-compose.yml` defines two services:
@@ -19,6 +19,10 @@ A small Node.js (Express) + PostgreSQL web app used as a target for end-to-end t
 - `app`: this Express server. It waits for `db` to be healthy before starting.
 
 On startup the app creates its tables and seeds a test user.
+
+## Item names
+
+An item name can be at most **80 characters** (after trimming). Longer names are refused with `400`.
 
 ## Required configuration
 
